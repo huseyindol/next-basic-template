@@ -1,15 +1,15 @@
 import Head from "next/head";
-import Counter from "../src/features/Counter";
+import SignUpF from "../../src/features/Auth/SignUp";
 
-export default function Home() {
+export default function SignUp() {
   return (
     <div className="container">
       <Head>
-        <title>Create Next sApp</title>
+        <title>SignUp</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Counter></Counter>
+        <SignUpF></SignUpF>
       </main>
     </div>
   );
