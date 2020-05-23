@@ -4,16 +4,16 @@
  *
  */
 
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 export const mainSlice = createSlice({
-  name: "main",
+  name: 'main',
   initialState: {
     error: null,
   },
   reducers: {
     modifiedData: (state, action) => {
-      console.log("modifiedData:", state, action);
+      console.log('modifiedData:', state, action);
       state[action.payload.name] = action.payload[action.payload.name];
     },
   },

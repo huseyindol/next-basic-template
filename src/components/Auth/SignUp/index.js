@@ -4,12 +4,12 @@
  *
  */
 
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { selectSignUp } from "./slice";
-import styles from "./styles.module.css";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectSignUp } from './slice';
+import { SignUpContainer } from './styles';
 // import PropTypes from 'prop-types';
-import { firebaseInit } from "../../../config/firebase";
+import { firebaseInit } from '../../../app/config/firebase';
 
 function SignUp() {
   const SignUpState = useSelector(selectSignUp);
@@ -18,26 +18,26 @@ function SignUp() {
     e.preventDefault();
     let formData = new FormData(e.target);
     formData = Object.fromEntries(formData);
-    console.log("signup submit", formData);
+    console.log('signup submit', formData);
     firebaseInit
       .auth()
       .createUserWithEmailAndPassword(formData.email, formData.password)
       .catch(function (error) {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log("errorCode", errorCode);
-        console.log("errorMessage", errorMessage);
+        console.log('errorCode', errorCode);
+        console.log('errorMessage', errorMessage);
       });
   };
   return (
-    <div className={styles.signUpContainer}>
+    <SignUpContainer>
       SignUp
       <form onSubmit={onSubmitHandle}>
         <input name="email" />
         <input name="password" />
         <button type="submit">Kaydet</button>
       </form>
-    </div>
+    </SignUpContainer>
   );
 }
 

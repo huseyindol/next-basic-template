@@ -1,5 +1,5 @@
-import Head from "next/head";
-import SignIn from "../../src/features/Auth/SignIn";
+import Head from 'next/head';
+import SignIn from '../../src/components/Auth/SignIn';
 
 export default function Auth() {
   return (

@@ -1,5 +1,5 @@
-import Head from "next/head";
-import Counter from "../src/features/Counter";
+import Head from 'next/head';
+import Counter from '../src/components/Counter';
 
 export default function Home() {
   return (
