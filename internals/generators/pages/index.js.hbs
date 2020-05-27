@@ -1,0 +1,26 @@
+/**
+*
+* {{ properCase name }}
+*
+*/
+
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+// import Component from '../src/components/Component';
+
+export default function {{ properCase name }}(props) {
+const router = useRouter();
+
+//console.log('{{name}}', props, router);
+return (
+<div className="{{ name }}-container">
+
+  <Head>
+    <title>{{ properCase name }} Page</title>
+  </Head>
+  <main>
+    {{ properCase name }} Page Main
+  </main>
+</div>
+);
+}

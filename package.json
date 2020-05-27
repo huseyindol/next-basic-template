@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js"
+    "start": "NODE_ENV=production node server.js",
+    "generate": "plop --plopfile internals/generators/index.js",
+    "prettify": "prettier --write"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.3.6",
@@ -14,12 +16,16 @@
     "eslint-plugin-react": "^7.20.0",
     "firebase": "^7.14.4",
     "next": "9.3.5",
+    "nprogress": "^0.2.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-redux": "^7.2.0",
     "styled-components": "^5.1.0"
   },
   "devDependencies": {
-    "babel-plugin-styled-components": "^1.10.7"
+    "babel-plugin-styled-components": "^1.10.7",
+    "express": "^4.17.1",
+    "plop": "^2.7.1",
+    "prettier": "^2.0.5"
   }
 }

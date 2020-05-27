@@ -1,12 +1,12 @@
 import Head from 'next/head';
 import Counter from '../src/components/Counter';
 
-export default function Home() {
+export default function Home(props) {
+  // console.log('home', props);
   return (
-    <div className="container">
+    <div className="home-container">
       <Head>
-        <title>Create Next sApp</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Home Page</title>
       </Head>
       <main>
         <Counter></Counter>

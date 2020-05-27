@@ -1,4 +1,6 @@
-import Link from 'next/link';
+import Router from 'next/router';
+import Head from 'next/head';
+import NProgress from 'nprogress';
 
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,42 +11,21 @@ import store from '../src/app/store';
 import { selectMain } from '../src/app/slice';
 import { firebaseInit } from '../src/app/config/firebase';
 import { theme } from '../src/app/styles';
+import Header from '../src/components/Header';
+
+Router.events.on('routeChangeStart', (url) => {
+  console.log(`Loading: ${url}`);
+
+  NProgress.start();
+});
+Router.events.on('routeChangeComplete', () => NProgress.done());
+Router.events.on('routeChangeError', () => NProgress.done());
 
 function MyApp(props) {
-  // console.log("MyApp", props);
   return (
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <nav>
-          <Link href="/">
-            <a>Anasayfa</a>
-          </Link>{' '}
-          |{' '}
-          <Link href="/auth" as="/signin">
-            <a>giris</a>
-          </Link>{' '}
-          |{' '}
-          <Link href="/auth/signup" as="/signup">
-            <a>kayıt</a>
-          </Link>
-        </nav>
-        <Layout {...props} />
-        <style jsx global>{`
-          html,
-          body {
-            padding: 0;
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-              Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-              sans-serif;
-          }
-
-          * {
-            box-sizing: border-box;
-          }
-        `}</style>
-      </Provider>
-    </ThemeProvider>
+    <Provider store={store}>
+      <Layout {...props} />
+    </Provider>
   );
 }
 
@@ -56,7 +37,9 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
   return { pageProps };
 };
 
-export const Layout = ({ Component, pageProps }) => {
+export const Layout = (props) => {
+  const { Component, pageProps } = props;
+
   const selector = useSelector(selectMain);
   const dispatch = useDispatch();
 
@@ -68,7 +51,7 @@ export const Layout = ({ Component, pageProps }) => {
       unsubscribe = await firebaseInit
         .auth()
         .onAuthStateChanged(function (user) {
-          console.log('geldi');
+          console.log('geldi', user);
           setUser(user);
         });
     };
@@ -78,8 +61,31 @@ export const Layout = ({ Component, pageProps }) => {
     };
   }, []);
 
-  // console.log("Layout", Component, pageProps);
-  return <Component {...pageProps} />;
+  // console.log('Layout', props);
+  return (
+    <ThemeProvider theme={theme}>
+      <Head>
+        {/* Import CSS for nprogress */}
+        <link rel="stylesheet" type="text/css" href="/nprogress.css" />
+      </Head>
+      <Header></Header>
+      <Component {...pageProps} />
+      <style jsx global>{`
+        html,
+        body {
+          padding: 0;
+          margin: 0;
+          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+            sans-serif;
+        }
+
+        * {
+          box-sizing: border-box;
+        }
+      `}</style>
+    </ThemeProvider>
+  );
 };
 
 export default MyApp;

@@ -1,6 +1,5 @@
 {
   "presets": ["next/babel"],
-  "extends": "eslint:recommended",
   "plugins": [
     [
       "styled-components",
