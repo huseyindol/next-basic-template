@@ -10,7 +10,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 
-import { selectMain } from '../../app/slice';
+import { selectMain, modifiedData } from '../../app/slice';
 import { firebaseInit } from '../../app/config/firebase';
 import Header from '../Header';
 
@@ -34,6 +34,12 @@ const Layout = (props) => {
         .onAuthStateChanged(function (user) {
           console.log('geldi', user);
           setUser(user);
+          dispatch(
+            modifiedData({
+              name: 'auth',
+              data: user && { ...user?.providerData[0] },
+            }),
+          );
         });
     };
     getUser();
@@ -42,7 +48,7 @@ const Layout = (props) => {
     };
   }, []);
 
-  console.log('Layout', props, Component.name);
+  // console.log('Layout', props);
   return (
     <ThemeProvider theme={theme}>
       <Head>
@@ -50,7 +56,7 @@ const Layout = (props) => {
         <link rel="stylesheet" type="text/css" href="/nprogress.css" />
       </Head>
       <LayoutContainer>
-        <Header></Header>
+        <Header firebase={firebaseInit}></Header>
         <Component {...pageProps} />
 
         <style jsx global>{`

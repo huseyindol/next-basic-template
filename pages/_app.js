@@ -8,8 +8,7 @@ import store from '../src/app/store';
 import Layout from '../src/components/Layout';
 
 Router.events.on('routeChangeStart', (url) => {
-  console.log(`Loading: ${url}`);
-
+  // console.log(`Loading: ${url}`);
   NProgress.start();
 });
 Router.events.on('routeChangeComplete', () => NProgress.done());

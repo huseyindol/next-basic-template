@@ -6,10 +6,29 @@
 import Link from 'next/link';
 
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { HeaderContainer } from './styles';
 // import PropTypes from 'prop-types';
 
-function Header() {
+import { selectMain } from '../../app/slice';
+
+function Header(props) {
+  const selector = useSelector(selectMain);
+  const { auth } = selector;
+
+  const signout = () => {
+    console.log('sigout');
+    props.firebase
+      .auth()
+      .signOut()
+      .then(function () {
+        console.log(' Sign-out successful');
+      })
+      .catch(function (error) {
+        console.log(' An error happened');
+      });
+  };
+  // console.log('header', props);
   return (
     <HeaderContainer>
       <nav>
@@ -17,13 +36,21 @@ function Header() {
           <a>Anasayfa</a>
         </Link>{' '}
         |{' '}
-        <Link href="/auth" as="/signin">
-          <a>giris</a>
-        </Link>{' '}
-        |{' '}
-        <Link href="/auth/signup" as="/signup">
-          <a>kayıt</a>
-        </Link>{' '}
+        {auth ? (
+          <a href="javascript:;" onClick={signout}>
+            çıkış
+          </a>
+        ) : (
+          <React.Fragment>
+            <Link href="/auth" as="/signin">
+              <a>giris</a>
+            </Link>{' '}
+            |{' '}
+            <Link href="/auth/signup" as="/signup">
+              <a>kayıt</a>
+            </Link>
+          </React.Fragment>
+        )}{' '}
         |{' '}
         <Link href="/product">
           <a>ürünler</a>

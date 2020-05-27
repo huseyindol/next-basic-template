@@ -18,7 +18,7 @@ function SignIn() {
     e.preventDefault();
     let formData = new FormData(e.target);
     formData = Object.fromEntries(formData);
-    console.log('signup submit', formData);
+    console.log('signin submit', formData);
     firebaseInit
       .auth()
       .signInWithEmailAndPassword(formData.email, formData.password)
