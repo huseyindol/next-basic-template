@@ -29,7 +29,7 @@ function Header() {
           <a>ürünler</a>
         </Link>{' '}
         |{' '}
-        <Link href="/product/1">
+        <Link href="/product/1" as="/product/urun1">
           <a>ürün 1</a>
         </Link>{' '}
         |{' '}
@@ -38,7 +38,7 @@ function Header() {
         </Link>{' '}
         |{' '}
         <Link href="/book/1">
-          <a>kitap</a>
+          <a>kitap 1</a>
         </Link>
       </nav>
     </HeaderContainer>

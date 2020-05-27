@@ -11,7 +11,8 @@ import { useRouter } from 'next/router';
 export default function Product(props) {
   const router = useRouter();
   const { id } = router.query;
-  //console.log('product', props, router);
+
+  console.log('product[slug]', props, router);
   return (
     <div className="product-container">
       <Head>

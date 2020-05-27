@@ -34,7 +34,7 @@ module.exports = (plop) => {
   });
   plop.addHelper('curly', (object, open) => (open ? '{' : '}'));
   plop.setActionType('prettify', (answers, config) => {
-    console.log('pre', answers, config);
+    // console.log('pre', answers, config);
     let folderPath = '';
     if (config.path === '../pages/') {
       if (config.dynamicPage) {
