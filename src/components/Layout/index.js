@@ -29,10 +29,12 @@ const Layout = (props) => {
   useEffect(() => {
     let unsubscribe;
     const getUser = async () => {
-      unsubscribe = await firebaseInit.auth().onAuthStateChanged(function (user) {
-        console.log('geldi', user);
-        setUser(user);
-      });
+      unsubscribe = await firebaseInit
+        .auth()
+        .onAuthStateChanged(function (user) {
+          console.log('geldi', user);
+          setUser(user);
+        });
     };
     getUser();
     return () => {
@@ -40,7 +42,7 @@ const Layout = (props) => {
     };
   }, []);
 
-  // console.log('Layout', props);
+  console.log('Layout', props, Component.name);
   return (
     <ThemeProvider theme={theme}>
       <Head>
@@ -56,8 +58,9 @@ const Layout = (props) => {
           body {
             padding: 0;
             margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
-              Droid Sans, Helvetica Neue, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+              Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+              sans-serif;
           }
 
           * {

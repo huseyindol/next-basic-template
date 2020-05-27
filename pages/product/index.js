@@ -11,7 +11,7 @@ import Head from 'next/head';
 export default function Product(props) {
   // const router = useRouter();
 
-  console.log('product', props);
+  // console.log('product', props);
   return (
     <div className="product-container">
       <Head>
