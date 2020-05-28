@@ -37,9 +37,7 @@ function Header(props) {
         </Link>{' '}
         |{' '}
         {auth ? (
-          <a href="javascript:;" onClick={signout}>
-            çıkış
-          </a>
+          <span onClick={signout}>çıkış</span>
         ) : (
           <React.Fragment>
             <Link href="/auth" as="/signin">

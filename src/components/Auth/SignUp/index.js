@@ -3,6 +3,7 @@
  * SignUp
  *
  */
+import Router from 'next/router';
 
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -22,6 +23,7 @@ function SignUp() {
     firebaseInit
       .auth()
       .createUserWithEmailAndPassword(formData.email, formData.password)
+      .then(() => Router.back())
       .catch(function (error) {
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -33,8 +35,8 @@ function SignUp() {
     <SignUpContainer>
       SignUp
       <form onSubmit={onSubmitHandle}>
-        <input name="email" />
-        <input name="password" />
+        <input type="text" name="email" />
+        <input type="password" name="password" required />
         <button type="submit">Kaydet</button>
       </form>
     </SignUpContainer>

@@ -6,9 +6,14 @@ import { Provider } from 'react-redux';
 
 import store from '../src/app/store';
 import Layout from '../src/components/Layout';
+import { firebaseInit } from '../src/app/config/firebase';
 
 Router.events.on('routeChangeStart', (url) => {
   // console.log(`Loading: ${url}`);
+  // console.log('current', firebaseInit.auth().currentUser);
+  (url === '/signin' || url === '/signup') &&
+    firebaseInit.auth().currentUser &&
+    Router.back();
   NProgress.start();
 });
 Router.events.on('routeChangeComplete', () => NProgress.done());

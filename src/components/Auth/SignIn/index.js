@@ -3,8 +3,9 @@
  * SignIn
  *
  */
+import Router from 'next/router';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 // import { useSelector, useDispatch } from "react-redux";
 // import { selectSignIn } from "./slice";
 import { SignInContainer } from './styles';
@@ -22,6 +23,7 @@ function SignIn() {
     firebaseInit
       .auth()
       .signInWithEmailAndPassword(formData.email, formData.password)
+      .then(() => Router.back())
       .catch(function (error) {
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -33,8 +35,8 @@ function SignIn() {
     <SignInContainer>
       SignIn
       <form onSubmit={onSubmitHandle}>
-        <input name="email" />
-        <input name="password" />
+        <input type="text" name="email" />
+        <input type="password" name="password" />
         <button type="submit">Giriş</button>
       </form>
     </SignInContainer>
